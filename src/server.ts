@@ -1,7 +1,7 @@
 import 'reflect-metadata';
-import express from 'express';
 import './database';
 import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
 import { buildSchema } from 'type-graphql';
 import UserResolver from './resolvers/UserResolver';
 
@@ -13,6 +13,8 @@ async function main() {
             resolvers: [UserResolver],
         }),
     });
+
+    await server.start();
 
     server.applyMiddleware({ app, path: '/graphql' });
 

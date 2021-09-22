@@ -1,4 +1,5 @@
-import { Mutation, Resolver, Arg } from 'type-graphql';
+import { Mutation, Resolver, Arg, Query } from 'type-graphql';
+import { getRepository } from 'typeorm';
 import User from '../models/User';
 import CreateUserService from '../services/CreateUserService';
 
@@ -19,6 +20,15 @@ class UserResolver {
         });
 
         return createdUser;
+    }
+
+    @Query(() => [User])
+    async users() {
+        const usersRepository = getRepository(User);
+
+        const users = await usersRepository.find();
+
+        return users;
     }
 }
 
