@@ -7,7 +7,6 @@ import {
     Field,
 } from 'type-graphql';
 import Session from '../models/Session';
-import User from '../models/User';
 import AuthenticateUserService from '../services/AuthenticateUserService';
 
 @Resolver()

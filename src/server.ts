@@ -3,16 +3,18 @@ import './database';
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import { buildSchema } from 'type-graphql';
+import ensureAuthenticated from './middlewares/ensureAuthenticated';
+
 import UserResolver from './resolvers/UserResolver';
 import SessionResolve from './resolvers/SessionResolver';
-import ensureAuthenticated from './middlewares/ensureAuthenticated';
+import EventResolver from './resolvers/EventResolver';
 
 async function main() {
     const app = express();
 
     const server = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [UserResolver, SessionResolve],
+            resolvers: [UserResolver, SessionResolve, EventResolver],
             authChecker: ensureAuthenticated,
         }),
         context: ({ req }) => {

@@ -11,6 +11,7 @@ interface TokenPayLoad {
 }
 
 interface Context {
+    req: Request;
     token?: string;
 }
 
@@ -30,11 +31,9 @@ const ensureAuthenticated: AuthChecker<Context> = ({
 
         const { sub } = decoded as TokenPayLoad;
 
-        // Context.user = {
-        //     id: sub,
-        // };
-
-        console.log(decoded);
+        Context.req.user = {
+            id: sub,
+        };
 
         return true;
     } catch {

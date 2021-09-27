@@ -6,7 +6,6 @@ import CreateUserService from '../services/CreateUserService';
 @Resolver()
 class UserResolver {
     @Query(() => [User]!)
-    @Authorized()
     async users() {
         const usersRepository = getRepository(User);
 
